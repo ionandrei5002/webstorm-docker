@@ -37,10 +37,12 @@ else
     echo "Directory $projects created."
 fi
 
-docker run --rm -it -e DISPLAY=$DISPLAY \
+docker run --rm -it --privileged -e DISPLAY=$DISPLAY \
     -v /tmp/.X11-unix:/tmp/.X11-unix \
     -v $cache:/home/andrei/.cache \
     -v $webstorm:/home/andrei/.WebStorm2019.2 \
     -v $java:/home/andrei/.java \
     -v $projects:/home/andrei/WebstormProjects/ \
+    --env _JAVA_AWT_WM_NONREPARENTING=1 \
+    --env AWT_TOOLKIT=MToolkit \
     webstorm-docker:latest
