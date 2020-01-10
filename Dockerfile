@@ -1,5 +1,7 @@
 FROM ui-base-docker:latest
 
+ARG username
+
 USER root
 
 RUN wget https://download.jetbrains.com/webstorm/WebStorm-2019.3.1.tar.gz -O /tmp/WebStorm-2019.3.1.tar.gz && \
@@ -20,6 +22,6 @@ RUN apt clean && \
     rm -rf /var/lib/apt/lists/* && \
     rm -rf /tmp/*
 
-USER andrei
+USER $username
 
 CMD ["/bin/bash", "--login", "/app/webstorm/bin/webstorm.sh"]
